@@ -1,18 +1,18 @@
-import { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { toast } from "react-toastify";
-import Card from "@/components/atoms/Card";
-import Button from "@/components/atoms/Button";
-import Select from "@/components/atoms/Select";
-import Loading from "@/components/ui/Loading";
-import Error from "@/components/ui/Error";
-import Empty from "@/components/ui/Empty";
-import BudgetModal from "@/components/organisms/BudgetModal";
-import CategoryBadge from "@/components/molecules/CategoryBadge";
-import ApperIcon from "@/components/ApperIcon";
 import { budgetsService } from "@/services/api/budgetsService";
 import { transactionsService } from "@/services/api/transactionsService";
 import { formatCurrency, getCurrentMonth, getMonthName } from "@/utils/formatters";
+import ApperIcon from "@/components/ApperIcon";
+import BudgetModal from "@/components/organisms/BudgetModal";
+import Button from "@/components/atoms/Button";
+import Select from "@/components/atoms/Select";
+import Card from "@/components/atoms/Card";
+import CategoryBadge from "@/components/molecules/CategoryBadge";
+import Loading from "@/components/ui/Loading";
+import Error from "@/components/ui/Error";
+import Empty from "@/components/ui/Empty";
 
 const Budgets = () => {
   const [data, setData] = useState({
@@ -151,7 +151,7 @@ acc[expense.category_c] = (acc[expense.category_c] || 0) + expense.amount_c;
     );
   }
 
-  const totalBudget = data.budgetData.reduce((sum, budget) => sum + budget.monthlyLimit, 0);
+const totalBudget = data.budgetData.reduce((sum, budget) => sum + budget.monthly_limit_c, 0);
   const totalSpent = data.budgetData.reduce((sum, budget) => sum + budget.spent, 0);
   const overallPercentage = totalBudget > 0 ? (totalSpent / totalBudget) * 100 : 0;
 
@@ -311,7 +311,7 @@ acc[expense.category_c] = (acc[expense.category_c] || 0) + expense.amount_c;
                       
                       <Card.Content>
                         <div className="space-y-4">
-                          <div className="flex justify-between items-end">
+<div className="flex justify-between items-end">
                             <div>
                               <p className="text-sm text-gray-600">Spent</p>
                               <p className="text-2xl font-bold text-gray-900">
@@ -321,11 +321,10 @@ acc[expense.category_c] = (acc[expense.category_c] || 0) + expense.amount_c;
                             <div className="text-right">
                               <p className="text-sm text-gray-600">Budget</p>
                               <p className="text-lg font-semibold text-gray-700">
-                                {formatCurrency(budget.monthlyLimit)}
+                                {formatCurrency(budget.monthly_limit_c)}
                               </p>
                             </div>
                           </div>
-
                           <div className="space-y-2">
                             <div className="flex justify-between text-sm">
                               <span className="text-gray-600">Progress</span>
