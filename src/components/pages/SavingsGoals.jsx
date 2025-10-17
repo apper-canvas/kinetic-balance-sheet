@@ -101,8 +101,8 @@ const SavingsGoals = () => {
   };
 
   const getGoalStatus = (goal) => {
-    const progress = (goal.currentAmount / goal.targetAmount) * 100;
-    const daysLeft = Math.ceil((new Date(goal.deadline) - new Date()) / (1000 * 60 * 60 * 24));
+const progress = (goal.current_amount_c / goal.target_amount_c) * 100;
+    const daysLeft = Math.ceil((new Date(goal.deadline_c) - new Date()) / (1000 * 60 * 60 * 24));
     
     if (progress >= 100) {
       return { status: "Completed", color: "success", icon: "CheckCircle" };
@@ -262,7 +262,7 @@ const SavingsGoals = () => {
                           </div>
                           <div>
                             <h3 className="text-lg font-semibold text-gray-900">
-                              {goal.name}
+{goal.name_c}
                             </h3>
                             <Badge variant={color}>
                               {status}
@@ -303,14 +303,14 @@ const SavingsGoals = () => {
                           <div className="flex justify-between items-end">
                             <div>
                               <p className="text-sm text-gray-600">Current Amount</p>
-                              <p className="text-2xl font-bold text-gray-900">
-                                {formatCurrency(goal.currentAmount)}
+<p className="text-2xl font-bold text-gray-900">
+                                {formatCurrency(goal.current_amount_c)}
                               </p>
                             </div>
                             <div className="text-right">
                               <p className="text-sm text-gray-600">Target</p>
-                              <p className="text-lg font-semibold text-gray-700">
-                                {formatCurrency(goal.targetAmount)}
+<p className="text-lg font-semibold text-gray-700">
+                                {formatCurrency(goal.target_amount_c)}
                               </p>
                             </div>
                           </div>
@@ -340,7 +340,7 @@ const SavingsGoals = () => {
                             <div>
                               <p className="text-sm text-gray-600">Deadline</p>
                               <p className="font-medium text-gray-900">
-                                {formatDate(goal.deadline)}
+{formatDate(goal.deadline_c)}
                               </p>
                             </div>
                             <div className="text-right">
@@ -357,7 +357,7 @@ const SavingsGoals = () => {
                           <div className="flex justify-between text-sm">
                             <span className="text-gray-600">Remaining</span>
                             <span className="font-medium text-gray-900">
-                              {formatCurrency(Math.max(0, goal.targetAmount - goal.currentAmount))}
+{formatCurrency(Math.max(0, goal.target_amount_c - goal.current_amount_c))}
                             </span>
                           </div>
                         </div>
@@ -383,7 +383,7 @@ const SavingsGoals = () => {
       <Modal
         isOpen={isContributionModalOpen}
         onClose={() => setIsContributionModalOpen(false)}
-        title={`Add Contribution to ${contributionGoal?.name}`}
+title={`Add Contribution to ${contributionGoal?.name_c}`}
         size="md"
       >
         <form onSubmit={handleContributionSubmit} className="space-y-6">
@@ -407,7 +407,7 @@ const SavingsGoals = () => {
               <div className="flex justify-between items-center mb-2">
                 <span className="text-sm text-gray-600">Current Amount</span>
                 <span className="font-medium">
-                  {formatCurrency(contributionGoal.currentAmount)}
+{formatCurrency(contributionGoal.current_amount_c)}
                 </span>
               </div>
               <div className="flex justify-between items-center mb-2">
@@ -419,7 +419,7 @@ const SavingsGoals = () => {
               <div className="flex justify-between items-center border-t pt-2">
                 <span className="font-medium text-gray-900">New Total</span>
                 <span className="font-bold text-gray-900">
-                  {formatCurrency(contributionGoal.currentAmount + (parseFloat(contributionAmount) || 0))}
+{formatCurrency(contributionGoal.current_amount_c + (parseFloat(contributionAmount) || 0))}
                 </span>
               </div>
             </div>

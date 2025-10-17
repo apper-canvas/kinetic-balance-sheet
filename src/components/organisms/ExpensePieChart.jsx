@@ -27,7 +27,7 @@ const ExpensePieChart = ({ month = getCurrentMonth() }) => {
         categoriesService.getAll()
       ]);
 
-      const expenses = transactions.filter(t => t.type === "expense");
+const expenses = transactions.filter(t => t.type_c === "expense");
       
       if (expenses.length === 0) {
         setData([]);
@@ -36,20 +36,20 @@ const ExpensePieChart = ({ month = getCurrentMonth() }) => {
 
       // Group expenses by category
       const categoryTotals = {};
-      expenses.forEach(expense => {
-        if (!categoryTotals[expense.category]) {
-          categoryTotals[expense.category] = 0;
+expenses.forEach(expense => {
+        if (!categoryTotals[expense.category_c]) {
+          categoryTotals[expense.category_c] = 0;
         }
-        categoryTotals[expense.category] += expense.amount;
+        categoryTotals[expense.category_c] += expense.amount_c;
       });
 
       // Create chart data with colors
       const chartData = Object.entries(categoryTotals).map(([categoryName, amount]) => {
-        const category = categories.find(cat => cat.name === categoryName);
+const category = categories.find(cat => cat.name_c === categoryName);
         return {
           category: categoryName,
           amount: amount,
-          color: category?.color || "#6b7280"
+          color: category?.color_c || "#6b7280"
         };
       });
 

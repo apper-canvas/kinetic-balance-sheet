@@ -17,8 +17,8 @@ const SavingsGoalModal = ({ isOpen, onClose, goal = null, onSave }) => {
   useEffect(() => {
     if (goal) {
       setFormData({
-        name: goal.name,
-        targetAmount: goal.targetAmount.toString(),
+name_c: goal.name_c,
+        target_amount_c: goal.target_amount_c.toString(),
         deadline: new Date(goal.deadline).toISOString().split("T")[0]
       });
     } else {
@@ -79,7 +79,11 @@ const SavingsGoalModal = ({ isOpen, onClose, goal = null, onSave }) => {
       };
 
       if (goal) {
-        await savingsGoalsService.update(goal.Id, goalData);
+await savingsGoalsService.update(goal.Id, {
+          name_c: goalData.name_c,
+          target_amount_c: parseFloat(goalData.target_amount_c),
+          deadline_c: goalData.deadline_c
+        });
         toast.success("Savings goal updated successfully!");
       } else {
         await savingsGoalsService.create(goalData);

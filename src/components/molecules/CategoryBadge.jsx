@@ -9,7 +9,7 @@ const CategoryBadge = ({ categoryName, className }) => {
     const loadCategory = async () => {
       try {
         const categories = await categoriesService.getAll();
-        const foundCategory = categories.find(cat => cat.name === categoryName);
+const foundCategory = categories.find(cat => cat.name_c === categoryName);
         setCategory(foundCategory);
       } catch (error) {
         console.error("Error loading category:", error);
@@ -31,10 +31,10 @@ const CategoryBadge = ({ categoryName, className }) => {
 
   return (
     <Badge 
-      color={category.color} 
+color={category.color_c} 
       className={className}
     >
-      {category.name}
+      {category.name_c}
     </Badge>
   );
 };

@@ -74,13 +74,25 @@ const Header = () => {
             </nav>
 
             {/* Actions */}
-            <div className="flex items-center space-x-3">
+<div className="flex items-center space-x-3">
               <Button
                 onClick={() => setIsTransactionModalOpen(true)}
                 className="flex items-center space-x-2"
               >
                 <ApperIcon name="Plus" className="w-4 h-4" />
                 <span className="hidden sm:inline">Add Transaction</span>
+              </Button>
+
+              <Button
+                onClick={() => {
+                  const { logout } = require('@/layouts/Root').useAuth();
+                  logout();
+                }}
+                variant="outline"
+                className="flex items-center space-x-2"
+              >
+                <ApperIcon name="LogOut" className="w-4 h-4" />
+                <span className="hidden sm:inline">Logout</span>
               </Button>
 
               {/* Mobile menu button */}

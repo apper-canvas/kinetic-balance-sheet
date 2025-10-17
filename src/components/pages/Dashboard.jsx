@@ -40,7 +40,7 @@ const Dashboard = () => {
     setLoading(true);
     setError("");
 
-    try {
+try {
       const currentMonth = getCurrentMonth();
       const [allTransactions, savingsGoals, budgets] = await Promise.all([
         transactionsService.getAll(),
@@ -50,24 +50,24 @@ const Dashboard = () => {
 
       // Calculate stats
       const totalIncome = allTransactions
-        .filter(t => t.type === "income")
-        .reduce((sum, t) => sum + t.amount, 0);
+        .filter(t => t.type_c === "income")
+        .reduce((sum, t) => sum + t.amount_c, 0);
 
       const totalExpenses = allTransactions
-        .filter(t => t.type === "expense")
-        .reduce((sum, t) => sum + t.amount, 0);
+        .filter(t => t.type_c === "expense")
+        .reduce((sum, t) => sum + t.amount_c, 0);
 
       const currentMonthTransactions = allTransactions.filter(t => 
-        t.date.startsWith(currentMonth)
+        t.date_c.startsWith(currentMonth)
       );
 
       const monthlyIncome = currentMonthTransactions
-        .filter(t => t.type === "income")
-        .reduce((sum, t) => sum + t.amount, 0);
+        .filter(t => t.type_c === "income")
+        .reduce((sum, t) => sum + t.amount_c, 0);
 
       const monthlyExpenses = currentMonthTransactions
-        .filter(t => t.type === "expense")
-        .reduce((sum, t) => sum + t.amount, 0);
+        .filter(t => t.type_c === "expense")
+        .reduce((sum, t) => sum + t.amount_c, 0);
 
       setData({
         transactions: allTransactions.slice(0, 5), // Recent 5 transactions
@@ -202,19 +202,19 @@ const Dashboard = () => {
                 <div className="space-y-4">
                   {data.transactions.map(transaction => (
                     <div
-                      key={transaction.Id}
+key={transaction.Id}
                       className="flex items-center justify-between p-3 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors duration-200"
                     >
                       <div className="flex items-center space-x-3">
                         <div className={`p-2 rounded-lg ${
-                          transaction.type === "income" 
+                          transaction.type_c === "income" 
                             ? "bg-emerald-100" 
                             : "bg-red-100"
                         }`}>
                           <ApperIcon 
-                            name={transaction.type === "income" ? "Plus" : "Minus"} 
+                            name={transaction.type_c === "income" ? "Plus" : "Minus"} 
                             className={`w-4 h-4 ${
-                              transaction.type === "income" 
+                              transaction.type_c === "income" 
                                 ? "text-emerald-600" 
                                 : "text-red-600"
                             }`}
@@ -222,20 +222,20 @@ const Dashboard = () => {
                         </div>
                         <div>
                           <p className="font-medium text-gray-900">
-                            {transaction.description}
+                            {transaction.description_c}
                           </p>
                           <p className="text-sm text-gray-500">
-                            {formatDate(transaction.date)} • {transaction.category}
+                            {formatDate(transaction.date_c)} • {transaction.category_c}
                           </p>
                         </div>
                       </div>
                       <div className={`font-semibold ${
-                        transaction.type === "income" 
+                        transaction.type_c === "income" 
                           ? "text-emerald-600" 
                           : "text-red-600"
                       }`}>
-                        {transaction.type === "income" ? "+" : "-"}
-                        {formatCurrency(transaction.amount)}
+                        {transaction.type_c === "income" ? "+" : "-"}
+                        {formatCurrency(transaction.amount_c)}
                       </div>
                     </div>
                   ))}
@@ -276,9 +276,9 @@ const Dashboard = () => {
                                          progress >= 50 ? "bg-amber-500" : "bg-red-500";
                     
                     return (
-                      <div key={goal.Id} className="space-y-2">
+<div key={goal.Id} className="space-y-2">
                         <div className="flex items-center justify-between">
-                          <h4 className="font-medium text-gray-900">{goal.name}</h4>
+                          <h4 className="font-medium text-gray-900">{goal.name_c}</h4>
                           <Badge variant="info">
                             {Math.round(progress)}%
                           </Badge>
@@ -290,8 +290,8 @@ const Dashboard = () => {
                           />
                         </div>
                         <div className="flex justify-between text-sm text-gray-600">
-                          <span>{formatCurrency(goal.currentAmount)}</span>
-                          <span>{formatCurrency(goal.targetAmount)}</span>
+                          <span>{formatCurrency(goal.current_amount_c)}</span>
+                          <span>{formatCurrency(goal.target_amount_c)}</span>
                         </div>
                       </div>
                     );

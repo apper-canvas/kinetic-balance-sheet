@@ -47,15 +47,15 @@ const IncomeExpenseChart = ({ months = 6 }) => {
       }
 
       // Aggregate transactions by month
-      transactions.forEach(transaction => {
+transactions.forEach(transaction => {
         const transactionMonth = transaction.date.substring(0, 7); // YYYY-MM
         const monthData = monthsData.find(m => m.key === transactionMonth);
         
         if (monthData) {
-          if (transaction.type === "income") {
-            monthData.income += transaction.amount;
+if (transaction.type_c === "income") {
+            monthData.income += transaction.amount_c;
           } else {
-            monthData.expenses += transaction.amount;
+            monthData.expenses += transaction.amount_c;
           }
         }
       });

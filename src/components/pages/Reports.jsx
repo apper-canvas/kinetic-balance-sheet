@@ -1,16 +1,18 @@
-import { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import Card from "@/components/atoms/Card";
+import { transactionsService } from "@/services/api/transactionsService";
+import { formatCurrency, getCurrentMonth, getMonthName } from "@/utils/formatters";
+import ApperIcon from "@/components/ApperIcon";
+import ExpensePieChart from "@/components/organisms/ExpensePieChart";
+import Header from "@/components/organisms/Header";
+import IncomeExpenseChart from "@/components/organisms/IncomeExpenseChart";
 import Select from "@/components/atoms/Select";
+import Card from "@/components/atoms/Card";
+import StatCard from "@/components/molecules/StatCard";
+import Transactions from "@/components/pages/Transactions";
 import Loading from "@/components/ui/Loading";
 import Error from "@/components/ui/Error";
 import Empty from "@/components/ui/Empty";
-import ExpensePieChart from "@/components/organisms/ExpensePieChart";
-import IncomeExpenseChart from "@/components/organisms/IncomeExpenseChart";
-import StatCard from "@/components/molecules/StatCard";
-import ApperIcon from "@/components/ApperIcon";
-import { transactionsService } from "@/services/api/transactionsService";
-import { formatCurrency, getCurrentMonth, getMonthName } from "@/utils/formatters";
 
 const Reports = () => {
   const [data, setData] = useState({
@@ -40,17 +42,17 @@ const Reports = () => {
         // Get all transactions for the year
         const year = selectedMonth.split("-")[0];
         const allTransactions = await transactionsService.getAll();
-        transactions = allTransactions.filter(t => t.date.startsWith(year));
+transactions = allTransactions.filter(t => t.date_c.startsWith(year));
       }
 
       // Calculate monthly statistics
       const income = transactions
-        .filter(t => t.type === "income")
-        .reduce((sum, t) => sum + t.amount, 0);
+        .filter(t => t.type_c === "income")
+        .reduce((sum, t) => sum + t.amount_c, 0);
 
       const expenses = transactions
-        .filter(t => t.type === "expense")
-        .reduce((sum, t) => sum + t.amount, 0);
+        .filter(t => t.type_c === "expense")
+        .reduce((sum, t) => sum + t.amount_c, 0);
 
       const netIncome = income - expenses;
       const savingsRate = income > 0 ? (netIncome / income) * 100 : 0;
@@ -58,9 +60,9 @@ const Reports = () => {
       // Category breakdown
       const categoryTotals = {};
       transactions
-        .filter(t => t.type === "expense")
+        .filter(t => t.type_c === "expense")
         .forEach(t => {
-          categoryTotals[t.category] = (categoryTotals[t.category] || 0) + t.amount;
+          categoryTotals[t.category_c] = (categoryTotals[t.category_c] || 0) + t.amount_c;
         });
 
       const categoryBreakdown = Object.entries(categoryTotals)

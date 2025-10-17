@@ -41,18 +41,18 @@ const Budgets = () => {
       ]);
 
       const expensesByCategory = expenses
-        .filter(t => t.type === "expense")
+.filter(t => t.type_c === "expense")
         .reduce((acc, expense) => {
-          acc[expense.category] = (acc[expense.category] || 0) + expense.amount;
+acc[expense.category_c] = (acc[expense.category_c] || 0) + expense.amount_c;
           return acc;
         }, {});
 
       // Combine budget data with actual spending
       const budgetData = budgets.map(budget => ({
-        ...budget,
-        spent: expensesByCategory[budget.category] || 0,
-        remaining: budget.monthlyLimit - (expensesByCategory[budget.category] || 0),
-        percentage: ((expensesByCategory[budget.category] || 0) / budget.monthlyLimit) * 100
+...budget,
+        spent: expensesByCategory[budget.category_c] || 0,
+        remaining: budget.monthly_limit_c - (expensesByCategory[budget.category_c] || 0),
+        percentage: ((expensesByCategory[budget.category_c] || 0) / budget.monthly_limit_c) * 100
       }));
 
       setData({
@@ -281,7 +281,7 @@ const Budgets = () => {
                     <Card className="hover:shadow-lg transition-shadow duration-200">
                       <Card.Header className="flex flex-row items-center justify-between">
                         <div className="flex items-center space-x-3">
-                          <CategoryBadge categoryName={budget.category} />
+<CategoryBadge categoryName={budget.category_c} />
                           <span className={`text-sm font-medium ${
                             budget.percentage >= 100 ? "text-red-600" :
                             budget.percentage >= 75 ? "text-amber-600" : "text-emerald-600"

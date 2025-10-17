@@ -35,12 +35,12 @@ const TransactionModal = ({ isOpen, onClose, transaction = null, onSave }) => {
 
   useEffect(() => {
     if (transaction) {
-      setFormData({
-        amount: transaction.amount.toString(),
-        category: transaction.category,
-        type: transaction.type,
-        description: transaction.description,
-        date: new Date(transaction.date).toISOString().split("T")[0]
+setFormData({
+        amount_c: transaction.amount_c.toString(),
+        category_c: transaction.category_c,
+        type_c: transaction.type_c,
+        description_c: transaction.description_c,
+        date_c: new Date(transaction.date_c).toISOString().split("T")[0]
       });
     } else {
       setFormData({
@@ -55,7 +55,7 @@ const TransactionModal = ({ isOpen, onClose, transaction = null, onSave }) => {
   }, [transaction, isOpen]);
 
   const filteredCategories = categories.filter(cat => 
-    cat.type === formData.type || cat.name === "Other" || cat.name === "Other Income"
+cat.type_c === formData.type_c || cat.name_c === "Other" || cat.name_c === "Other Income"
   );
 
   const validateForm = () => {
@@ -92,13 +92,15 @@ const TransactionModal = ({ isOpen, onClose, transaction = null, onSave }) => {
 
     try {
       const transactionData = {
-        ...formData,
-        amount: parseFloat(formData.amount),
-        date: new Date(formData.date).toISOString()
+amount_c: parseFloat(formData.amount_c),
+        category_c: formData.category_c,
+        type_c: formData.type_c,
+        description_c: formData.description_c,
+        date_c: new Date(formData.date_c).toISOString()
       };
 
       if (transaction) {
-        await transactionsService.update(transaction.Id, transactionData);
+await transactionsService.update(transaction.Id, transactionData);
         toast.success("Transaction updated successfully!");
       } else {
         await transactionsService.create(transactionData);
@@ -121,9 +123,9 @@ const TransactionModal = ({ isOpen, onClose, transaction = null, onSave }) => {
     setFormData(prev => ({ ...prev, [field]: value }));
     
     // Clear category when type changes
-    if (field === "type" && formData.category) {
-      const selectedCategory = categories.find(cat => cat.name === formData.category);
-      if (selectedCategory && selectedCategory.type !== value) {
+if (field === "type_c" && formData.category_c) {
+      const selectedCategory = categories.find(cat => cat.name_c === formData.category_c);
+      if (selectedCategory && selectedCategory.type_c !== value) {
         setFormData(prev => ({ ...prev, [field]: value, category: "" }));
       }
     }
@@ -178,8 +180,8 @@ const TransactionModal = ({ isOpen, onClose, transaction = null, onSave }) => {
         >
           <option value="">Select a category</option>
           {filteredCategories.map(category => (
-            <option key={category.Id} value={category.name}>
-              {category.name}
+<option key={category.Id} value={category.name_c}>
+              {category.name_c}
             </option>
           ))}
         </FormField>

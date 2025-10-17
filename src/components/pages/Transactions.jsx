@@ -71,13 +71,13 @@ const Transactions = () => {
     if (filters.search) {
       const searchLower = filters.search.toLowerCase();
       filtered = filtered.filter(t => 
-        t.description.toLowerCase().includes(searchLower) ||
-        t.category.toLowerCase().includes(searchLower)
+t.description_c.toLowerCase().includes(searchLower) ||
+        t.category_c.toLowerCase().includes(searchLower)
       );
     }
 
     // Category filter
-    if (filters.category) {
+if (filters.category_c) {
       filtered = filtered.filter(t => t.category === filters.category);
     }
 
@@ -211,8 +211,8 @@ const Transactions = () => {
                   >
                     <option value="">All Categories</option>
                     {data.categories.map(category => (
-                      <option key={category.Id} value={category.name}>
-                        {category.name}
+<option key={category.Id} value={category.name_c}>
+                        {category.name_c}
                       </option>
                     ))}
                   </Select>
@@ -310,39 +310,46 @@ const Transactions = () => {
                         >
                           <td className="px-6 py-4">
                             <div className="flex items-center space-x-3">
-                              <div className={`p-2 rounded-lg ${
+<div className={`p-2 rounded-lg ${
                                 transaction.type === "income" 
                                   ? "bg-emerald-100" 
                                   : "bg-red-100"
                               }`}>
-                                <ApperIcon 
+<ApperIcon
                                   name={transaction.type === "income" ? "Plus" : "Minus"} 
                                   className={`w-4 h-4 ${
-                                    transaction.type === "income" 
+transaction.type_c === "income"
                                       ? "text-emerald-600" 
                                       : "text-red-600"
                                   }`}
                                 />
                               </div>
                               <div>
-                                <p className="font-medium text-gray-900">
+<p className="font-medium text-gray-900">
+                                  {transaction.description_c}
                                   {transaction.description}
                                 </p>
-                                <p className="text-sm text-gray-500 capitalize">
+<p className="text-sm text-gray-500 capitalize">
+                                  {formatDate(transaction.date_c)} • {transaction.category_c}
                                   {transaction.type}
                                 </p>
                               </div>
                             </div>
                           </td>
                           <td className="px-6 py-4">
-                            <CategoryBadge categoryName={transaction.category} />
+<CategoryBadge categoryName={transaction.category_c} />
                           </td>
                           <td className="px-6 py-4 text-gray-900">
                             {formatDate(transaction.date)}
                           </td>
                           <td className="px-6 py-4 text-right">
                             <span className={`font-semibold ${
-                              transaction.type === "income" 
+transaction.type_c === "income" 
+                                ? "text-emerald-600" 
+                                : "text-red-600"
+                            }`}>
+                              {transaction.type_c === "income" ? "+" : "-"}
+                              {formatCurrency(transaction.amount_c)}
                                 ? "text-emerald-600" 
                                 : "text-red-600"
                             }`}>

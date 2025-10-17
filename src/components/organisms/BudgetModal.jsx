@@ -35,8 +35,8 @@ const BudgetModal = ({ isOpen, onClose, budget = null, onSave, selectedMonth = g
   useEffect(() => {
     if (budget) {
       setFormData({
-        category: budget.category,
-        monthlyLimit: budget.monthlyLimit.toString(),
+category_c: budget.category_c,
+        monthly_limit_c: budget.monthly_limit_c.toString(),
         month: budget.month
       });
     } else {
@@ -84,7 +84,11 @@ const BudgetModal = ({ isOpen, onClose, budget = null, onSave, selectedMonth = g
       };
 
       if (budget) {
-        await budgetsService.update(budget.Id, budgetData);
+await budgetsService.update(budget.Id, {
+          category_c: budgetData.category_c,
+          monthly_limit_c: parseFloat(budgetData.monthly_limit_c),
+          month_c: budgetData.month_c
+        });
         toast.success("Budget updated successfully!");
       } else {
         await budgetsService.upsert(budgetData.category, budgetData.month, budgetData.monthlyLimit);
@@ -131,7 +135,7 @@ const BudgetModal = ({ isOpen, onClose, budget = null, onSave, selectedMonth = g
         >
           <option value="">Select a category</option>
           {categories.map(category => (
-            <option key={category.Id} value={category.name}>
+<option key={category.Id} value={category.name_c}>
               {category.name}
             </option>
           ))}
