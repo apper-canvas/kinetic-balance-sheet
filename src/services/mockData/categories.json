@@ -1,0 +1,65 @@
+[
+  {
+    "Id": 1,
+    "name": "Housing",
+    "color": "#3b82f6",
+    "type": "expense",
+    "isDefault": true
+  },
+  {
+    "Id": 2,
+    "name": "Food",
+    "color": "#f59e0b",
+    "type": "expense",
+    "isDefault": true
+  },
+  {
+    "Id": 3,
+    "name": "Transportation",
+    "color": "#8b5cf6",
+    "type": "expense",
+    "isDefault": true
+  },
+  {
+    "Id": 4,
+    "name": "Entertainment",
+    "color": "#ec4899",
+    "type": "expense",
+    "isDefault": true
+  },
+  {
+    "Id": 5,
+    "name": "Healthcare",
+    "color": "#ef4444",
+    "type": "expense",
+    "isDefault": true
+  },
+  {
+    "Id": 6,
+    "name": "Other",
+    "color": "#6b7280",
+    "type": "expense",
+    "isDefault": true
+  },
+  {
+    "Id": 7,
+    "name": "Salary",
+    "color": "#10b981",
+    "type": "income",
+    "isDefault": true
+  },
+  {
+    "Id": 8,
+    "name": "Investment",
+    "color": "#059669",
+    "type": "income",
+    "isDefault": true
+  },
+  {
+    "Id": 9,
+    "name": "Other Income",
+    "color": "#047857",
+    "type": "income",
+    "isDefault": true
+  }
+]
