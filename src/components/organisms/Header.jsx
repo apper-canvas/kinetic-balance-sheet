@@ -12,11 +12,12 @@ const Header = () => {
   const { logout } = useAuth();
   const [isTransactionModalOpen, setIsTransactionModalOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const navigation = [
+const navigation = [
     { name: "Dashboard", path: "/", icon: "LayoutDashboard" },
     { name: "Transactions", path: "/transactions", icon: "Receipt" },
     { name: "Budgets", path: "/budgets", icon: "Target" },
     { name: "Savings Goals", path: "/goals", icon: "TrendingUp" },
+    { name: "Bank Accounts", path: "/bank-accounts", icon: "Landmark" },
     { name: "Reports", path: "/reports", icon: "BarChart3" },
   ];
 

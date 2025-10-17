@@ -17,6 +17,7 @@ const Callback = lazy(() => import("@/components/pages/Callback"));
 const ErrorPage = lazy(() => import("@/components/pages/ErrorPage"));
 const ResetPassword = lazy(() => import("@/components/pages/ResetPassword"));
 const PromptPassword = lazy(() => import("@/components/pages/PromptPassword"));
+const BankAccounts = lazy(() => import("@/components/pages/BankAccounts"));
 const NotFound = lazy(() => import("@/components/pages/NotFound"));
 
 // Create route helper
@@ -84,6 +85,10 @@ const mainRoutes = [
   createRoute({
     path: "reports",
     element: <Reports />
+}),
+  createRoute({
+    path: "bank-accounts",
+    element: <BankAccounts />,
   }),
   createRoute({
     path: "*",
