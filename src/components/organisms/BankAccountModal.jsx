@@ -65,7 +65,7 @@ if (!formData.currency_c?.trim()) {
       newErrors.currency_c = 'Currency is required';
     }
 
-    if (String(formData.balance_c).trim() === '') {
+if (formData.balance_c === null || formData.balance_c === undefined || String(formData.balance_c).trim() === '') {
       newErrors.balance_c = 'Balance is required';
     } else if (isNaN(parseFloat(formData.balance_c))) {
       newErrors.balance_c = 'Balance must be a valid number';
