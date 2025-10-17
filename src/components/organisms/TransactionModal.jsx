@@ -55,13 +55,13 @@ setFormData({
   }, [transaction, isOpen]);
 
   const filteredCategories = categories.filter(cat => 
-cat.type_c === formData.type_c || cat.name_c === "Other" || cat.name_c === "Other Income"
+cat.type_c === formData.type || cat.name_c === "Other" || cat.name_c === "Other Income"
   );
 
   const validateForm = () => {
     const newErrors = {};
 
-    if (!formData.amount || parseFloat(formData.amount) <= 0) {
+if (!formData.amount || parseFloat(formData.amount) <= 0) {
       newErrors.amount = "Amount must be greater than 0";
     }
 
@@ -92,11 +92,11 @@ cat.type_c === formData.type_c || cat.name_c === "Other" || cat.name_c === "Othe
 
     try {
       const transactionData = {
-amount_c: parseFloat(formData.amount_c),
-        category_c: formData.category_c,
-        type_c: formData.type_c,
-        description_c: formData.description_c,
-        date_c: new Date(formData.date_c).toISOString()
+amount_c: parseFloat(formData.amount),
+        category_c: formData.category,
+        type_c: formData.type,
+        description_c: formData.description,
+        date_c: new Date(formData.date).toISOString()
       };
 
       if (transaction) {
@@ -120,11 +120,11 @@ await transactionsService.update(transaction.Id, transactionData);
   };
 
   const handleInputChange = (field, value) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+setFormData(prev => ({ ...prev, [field]: value }));
     
     // Clear category when type changes
-if (field === "type_c" && formData.category_c) {
-      const selectedCategory = categories.find(cat => cat.name_c === formData.category_c);
+    if (field === "type" && formData.category) {
+      const selectedCategory = categories.find(cat => cat.name_c === formData.category);
       if (selectedCategory && selectedCategory.type_c !== value) {
         setFormData(prev => ({ ...prev, [field]: value, category: "" }));
       }
