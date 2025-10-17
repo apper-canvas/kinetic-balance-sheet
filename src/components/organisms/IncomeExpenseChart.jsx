@@ -48,7 +48,8 @@ const IncomeExpenseChart = ({ months = 6 }) => {
 
       // Aggregate transactions by month
 transactions.forEach(transaction => {
-        const transactionMonth = transaction.date.substring(0, 7); // YYYY-MM
+        if (!transaction.date_c) return; // Skip transactions without dates
+        const transactionMonth = transaction.date_c.substring(0, 7); // YYYY-MM
         const monthData = monthsData.find(m => m.key === transactionMonth);
         
         if (monthData) {
