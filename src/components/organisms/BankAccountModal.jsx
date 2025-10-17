@@ -61,11 +61,11 @@ const BankAccountModal = ({ isOpen, onClose, account = null, onSaved }) => {
       newErrors.account_type_c = 'Account type is required';
     }
 
-    if (!formData.currency_c?.trim()) {
+if (!formData.currency_c?.trim()) {
       newErrors.currency_c = 'Currency is required';
     }
 
-if (formData.balance_c === '' || formData.balance_c === null || formData.balance_c === undefined) {
+    if (String(formData.balance_c).trim() === '') {
       newErrors.balance_c = 'Balance is required';
     } else if (isNaN(parseFloat(formData.balance_c))) {
       newErrors.balance_c = 'Balance must be a valid number';
