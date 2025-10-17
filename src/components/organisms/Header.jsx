@@ -9,9 +9,9 @@ import { useAuth } from "@/layouts/Root";
 const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { logout } = useAuth();
   const [isTransactionModalOpen, setIsTransactionModalOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
   const navigation = [
     { name: "Dashboard", path: "/", icon: "LayoutDashboard" },
     { name: "Transactions", path: "/transactions", icon: "Receipt" },
@@ -86,7 +86,6 @@ const Header = () => {
 
               <Button
 onClick={() => {
-                  const { logout } = useAuth();
                   logout();
                 }}
                 variant="outline"
