@@ -65,7 +65,7 @@ const BankAccountModal = ({ isOpen, onClose, account = null, onSaved }) => {
       newErrors.currency_c = 'Currency is required';
     }
 
-    if (!formData.balance_c && formData.balance_c !== 0) {
+if (formData.balance_c === '' || formData.balance_c === null || formData.balance_c === undefined) {
       newErrors.balance_c = 'Balance is required';
     } else if (isNaN(parseFloat(formData.balance_c))) {
       newErrors.balance_c = 'Balance must be a valid number';
