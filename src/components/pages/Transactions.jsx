@@ -78,7 +78,7 @@ t.description_c.toLowerCase().includes(searchLower) ||
 
     // Category filter
 if (filters.category_c) {
-      filtered = filtered.filter(t => t.category === filters.category);
+      filtered = filtered.filter(t => t.category_c === filters.category_c);
     }
 
     // Type filter
@@ -311,12 +311,12 @@ if (filters.category_c) {
                           <td className="px-6 py-4">
                             <div className="flex items-center space-x-3">
 <div className={`p-2 rounded-lg ${
-                                transaction.type === "income" 
+                                transaction.type_c === "income" 
                                   ? "bg-emerald-100" 
                                   : "bg-red-100"
                               }`}>
 <ApperIcon
-                                  name={transaction.type === "income" ? "Plus" : "Minus"} 
+                                  name={transaction.type_c === "income" ? "Plus" : "Minus"} 
                                   className={`w-4 h-4 ${
 transaction.type_c === "income"
                                       ? "text-emerald-600" 
@@ -327,11 +327,9 @@ transaction.type_c === "income"
                               <div>
 <p className="font-medium text-gray-900">
                                   {transaction.description_c}
-                                  {transaction.description}
                                 </p>
 <p className="text-sm text-gray-500 capitalize">
                                   {formatDate(transaction.date_c)} • {transaction.category_c}
-                                  {transaction.type}
                                 </p>
                               </div>
                             </div>
@@ -350,11 +348,6 @@ transaction.type_c === "income"
                             }`}>
                               {transaction.type_c === "income" ? "+" : "-"}
                               {formatCurrency(transaction.amount_c)}
-                                ? "text-emerald-600" 
-                                : "text-red-600"
-                            }`}>
-                              {transaction.type === "income" ? "+" : "-"}
-                              {formatCurrency(transaction.amount)}
                             </span>
                           </td>
                           <td className="px-6 py-4 text-center">

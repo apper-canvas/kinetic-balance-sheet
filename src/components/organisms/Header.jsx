@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Button from "@/components/atoms/Button";
 import ApperIcon from "@/components/ApperIcon";
 import TransactionModal from "@/components/organisms/TransactionModal";
+import { useAuth } from "@/layouts/Root";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -84,8 +85,8 @@ const Header = () => {
               </Button>
 
               <Button
-                onClick={() => {
-                  const { logout } = require('@/layouts/Root').useAuth();
+onClick={() => {
+                  const { logout } = useAuth();
                   logout();
                 }}
                 variant="outline"
