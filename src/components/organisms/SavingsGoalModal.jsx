@@ -16,9 +16,9 @@ const SavingsGoalModal = ({ isOpen, onClose, goal = null, onSave }) => {
 
   useEffect(() => {
     if (goal) {
-      setFormData({
-name_c: goal.name_c,
-        target_amount_c: goal.target_amount_c.toString(),
+setFormData({
+        name_c: goal.name_c,
+        target_amount_c: goal.target_amount_c?.toString() ?? '',
         deadline: new Date(goal.deadline).toISOString().split("T")[0]
       });
     } else {
